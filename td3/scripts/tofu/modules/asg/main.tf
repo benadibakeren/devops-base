@@ -1,3 +1,14 @@
+data "aws_vpc" "default" {
+  default = true
+}
+
+data "aws_subnets" "default" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.default.id]
+  }
+}
+
 resource "aws_launch_template" "this" {
   name_prefix   = var.name
   image_id      = var.ami_id
@@ -20,5 +31,6 @@ resource "aws_autoscaling_group" "this" {
     version = "$Latest"
   }
 
-  vpc_zone_identifier = []
+  vpc_zone_identifier = data.aws_subnets.default.ids
+
 }
