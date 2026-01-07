@@ -1,0 +1,14 @@
+# Terraform / OpenTofu
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# Packer
+packer_cache/
+.packer_cache/
+
+# Keys
+*.pem
+*.key
+
